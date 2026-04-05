@@ -22,8 +22,8 @@ android {
         applicationId = "com.fct.gardendless"
         minSdk = 27
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.7.1"
+        versionCode = 5
+        versionName = "0.8.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
