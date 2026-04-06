@@ -103,7 +103,7 @@ class GameActivity : AppCompatActivity() {
             val assetLoader = WebViewAssetLoader.Builder()
                 .setDomain("appassets.androidplatform.net")
                 .addPathHandler(
-                    "/game/",
+                    "/",
                     InternalStoragePathHandler(this, File(filesDir, "pvzge_web-master/docs"))
                 )
                 .build()
@@ -231,8 +231,8 @@ class GameActivity : AppCompatActivity() {
             }
 
             // 5. 加载入口文件
-            // 映射关系：https://appassets.androidplatform.net/game/ -> gameDir/
-            webView.loadUrl("https://appassets.androidplatform.net/game/index.html")
+            // 映射关系：https://appassets.androidplatform.net/ -> gameDir/
+            webView.loadUrl("https://appassets.androidplatform.net/index.html")
 
             setupBackNavigation()
         }
