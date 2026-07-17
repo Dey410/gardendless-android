@@ -43,7 +43,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          sdkmanager \
+          sdkmanager_path="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "${sdkmanager_path}" ]]; then
+            echo "sdkmanager not found or not executable: ${sdkmanager_path}" >&2
+            exit 1
+          fi
+
+          "${sdkmanager_path}" \
+            --sdk_root="${ANDROID_HOME}" \
             "platforms;android-36" \
             "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"
 
