@@ -194,8 +194,14 @@ jobs:
           apksigner_path="${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/apksigner"
           "${apksigner_path}" verify --verbose "${output_apk}"
 
-          actual_version_name="$(apkanalyzer manifest version-name "${output_apk}")"
-          actual_version_code="$(apkanalyzer manifest version-code "${output_apk}")"
+          apkanalyzer_path="${ANDROID_HOME}/cmdline-tools/latest/bin/apkanalyzer"
+          if [[ ! -x "${apkanalyzer_path}" ]]; then
+            echo "apkanalyzer not found or not executable: ${apkanalyzer_path}" >&2
+            exit 1
+          fi
+
+          actual_version_name="$("${apkanalyzer_path}" manifest version-name "${output_apk}")"
+          actual_version_code="$("${apkanalyzer_path}" manifest version-code "${output_apk}")"
           if [[ "${actual_version_name}" != "${EXPECTED_VERSION_NAME}" ]]; then
             echo "Unexpected versionName: ${actual_version_name}" >&2
             exit 1
